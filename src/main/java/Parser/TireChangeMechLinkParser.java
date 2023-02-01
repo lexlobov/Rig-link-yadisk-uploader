@@ -29,9 +29,8 @@ public class TireChangeMechLinkParser extends HttpHandler implements Parser{
 //            fakeHtml += line +"\n";
 //            line = reader.readLine();
 //        }
-//        System.out.println(fakeHtml);
 
-        Document doc = Jsoup.parse(html);
+        Document doc = Jsoup.parse(html); //fakeHtml
         List<Element> rows = doc.selectXpath("//div[@class='col-xs-12 col-md-8']");
         String message = rows.stream()
                 .filter(m -> m.text().contains("There is a new tire change request near you. Tap the link to respond")).findFirst()
@@ -46,9 +45,5 @@ public class TireChangeMechLinkParser extends HttpHandler implements Parser{
 
     public void setLink(String link) {
         this.link = link;
-    }
-    @Override
-    public String getLink() {
-        return link;
     }
 }

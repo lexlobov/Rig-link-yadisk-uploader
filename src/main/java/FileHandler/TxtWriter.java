@@ -16,10 +16,11 @@ public class TxtWriter {
     }
 
     public boolean write() throws IOException {
-        if (parser.getMechLink() == null) return false;
+        String link = parser.getMechLink();
+        if (link == null) return false;
         File file = new File("link.txt");
         try (Writer writer = new FileWriter(file)) {
-            writer.write(parser.getLink());
+            writer.write(link);
         } catch (IOException e) {
             System.out.println("Wasn't able to write file");
             return false;
