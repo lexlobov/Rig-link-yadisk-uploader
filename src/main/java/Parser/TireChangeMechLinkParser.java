@@ -8,9 +8,15 @@ import java.io.*;
 import java.util.List;
 
 public class TireChangeMechLinkParser extends HttpHandler implements Parser{
+    public TireChangeMechLinkParser(String phoneNumber) {
+        super(phoneNumber);
+    }
+
+    private String link;
+
     @Override
-    public String getLink(String phone) throws IOException {
-        String html = getHtml(phone);
+    public String getMechLink() throws IOException {
+        String html = getHtml();
         if (html.equals("false")){
             System.out.println("Request wasn't successful");
             return null;
@@ -33,6 +39,16 @@ public class TireChangeMechLinkParser extends HttpHandler implements Parser{
                 .orElse(null);
         int idx = message.indexOf("http");
         String link = message.substring(idx);
+        setLink(link);
+        return link;
+    }
+
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+    @Override
+    public String getLink() {
         return link;
     }
 }

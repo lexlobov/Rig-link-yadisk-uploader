@@ -8,9 +8,16 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws ServerException, IOException {
-        Parser parser = new TireChangeMechLinkParser();
-        TxtWriter txtWriter = new TxtWriter();
-        YadiskUploader uploader = new YadiskUploader();
-        uploader.yadiskUploader(txtWriter.write(parser.getLink("")));
+
+        try {
+            String number = args[0];
+
+            Parser parser = new TireChangeMechLinkParser(number);
+            TxtWriter txtWriter = new TxtWriter(parser);
+            YadiskUploader uploader = new YadiskUploader();
+            uploader.yadiskUploader(txtWriter.write());
+        } catch (IndexOutOfBoundsException e){
+            System.out.println("Phone number is needed. Restart program with phone number in args :<");
+        }
     }
 }
